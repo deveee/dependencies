@@ -107,6 +107,9 @@ jobs:
           sed -i 's/set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror")//g' CMakeLists.txt
           # Windows XP compatibility
           sed -i 's/if defined(_TRUNCATE)/if 0/g' library/platform.c
+          if [ ${{ matrix.arch }} = "i686" ]; then
+            sed -i 's/#define MBEDTLS_AESNI_C//g' "include/mbedtls/mbedtls_config.h"
+          fi
           mkdir build
           cd build
           unset EXTRA_CFLAGS
