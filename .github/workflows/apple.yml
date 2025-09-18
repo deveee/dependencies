@@ -422,10 +422,14 @@ jobs:
           # Only single arch for iphoneos and appletvos
           mv dependencies-iphoneos-arm64 dependencies-iphoneos
           mv dependencies-appletvos-arm64 dependencies-appletvos
+      - name: Install Metal Toolchain
+        run: |
+          sudo xcodebuild -downloadComponent MetalToolchain
       - name: Build SDL2
         run: |
           tar xf build/sdl.tar.xz
           cd src/sdl2/Xcode/SDL
+          sed -i '' 's/MACOSX_DEPLOYMENT_TARGET = 10.11;/MACOSX_DEPLOYMENT_TARGET = 10.13;/g' SDL.xcodeproj/project.pbxproj
           xcodebuild -project SDL.xcodeproj -target "Shared Library" -configuration Release -sdk macosx CONFIGURATION_BUILD_DIR=./build-macosx
           cp -a build-macosx/libSDL2.dylib ../../../../dependencies-macosx/lib
           cp -rp ../../include ../../../../dependencies-macosx/include/SDL2
