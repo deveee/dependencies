@@ -55,3 +55,9 @@
 [submodule "src/shaderc"]
 	path = src/shaderc
 	url = https://github.com/google/shaderc
+[submodule "src/libadrenotools"]
+	path = src/libadrenotools
+	url = https://github.com/bylaws/libadrenotools
+[submodule "src/mesa"]
+	path = src/mesa
+	url = https://gitlab.freedesktop.org/mesa/mesa.git
